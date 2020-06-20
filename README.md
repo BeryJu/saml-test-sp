@@ -21,7 +21,6 @@ This tool is full configured using environment variables.
 - `SP_METADATA_URL`: Optional URL that metadata is fetched from. The metadata is fetched on the first request to `/`
 ---
 - `SP_SSO_URL`: If the metadata URL is not configured, use these options to configure it manually.
-    - If you're not using `SP_METADATA_URL`, the issuer needs to be set to an empty string.
 - `SP_SSO_BINDING`: Binding Type used for the IdP, defaults to POST Redirect. Allowed values: `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST` and `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect`
 
 ## Running

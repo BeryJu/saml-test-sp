@@ -24,6 +24,8 @@ func LoadConfig() samlsp.Options {
 		Logger: log.WithField("component", "saml-lib"),
 	}
 
+	samlOptions.EntityID = Env("SP_ENTITY_ID", "saml-test-sp")
+
 	metadataURL, metadataURLexists := os.LookupEnv("SP_METADATA_URL")
 	if metadataURLexists {
 		log.Debugf("Will attempt to load metadata from %s", metadataURL)
@@ -36,6 +38,7 @@ func LoadConfig() samlsp.Options {
 		ssoURL := Env("SP_SSO_URL", "")
 		binding := Env("SP_SSO_BINDING", saml.HTTPPostBinding)
 		samlOptions.IDPMetadata = &saml.EntityDescriptor{
+			EntityID: samlOptions.EntityID,
 			IDPSSODescriptors: []saml.IDPSSODescriptor{
 				{
 					SingleSignOnServices: []saml.Endpoint{
@@ -48,8 +51,6 @@ func LoadConfig() samlsp.Options {
 			},
 		}
 	}
-
-	samlOptions.EntityID = Env("SP_ENTITY_ID", "saml-test-sp")
 
 	rootURL := Env("SP_ROOT_URL", "http://localhost:9009")
 	url, err := url.Parse(rootURL)
