@@ -22,6 +22,7 @@ This tool is full configured using environment variables.
 ---
 - `SP_SSO_URL`: If the metadata URL is not configured, use these options to configure it manually.
 - `SP_SSO_BINDING`: Binding Type used for the IdP, defaults to POST Redirect. Allowed values: `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST` and `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect`
+- `SP_SIGNING_CERT`: PEM-encoded Certificate used for signing, with the PEM Header and all newlines removed.
 
 ## Running
 

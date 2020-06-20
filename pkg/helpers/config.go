@@ -50,6 +50,16 @@ func LoadConfig() samlsp.Options {
 				},
 			},
 		}
+		if singingCert := Env("SP_SIGNING_CERT", ""); singingCert != "" {
+			samlOptions.IDPMetadata.IDPSSODescriptors[0].KeyDescriptors = []saml.KeyDescriptor{
+				{
+					Use: "singing",
+					KeyInfo: saml.KeyInfo{
+						Certificate: singingCert,
+					},
+				},
+			}
+		}
 	}
 
 	rootURL := Env("SP_ROOT_URL", "http://localhost:9009")
