@@ -1,6 +1,7 @@
 package helpers
 
 import (
+	"fmt"
 	"net/url"
 	"os"
 
@@ -57,7 +58,7 @@ func LoadConfig() samlsp.Options {
 	}
 	samlOptions.URL = *url
 
-	priv, pub := Generate(url.Hostname())
+	priv, pub := Generate(fmt.Sprintf("localhost,%s", url.Hostname()))
 	samlOptions.Key = priv
 	samlOptions.Certificate = pub
 	log.Debugf("Configuration Optons: %+v", samlOptions)
