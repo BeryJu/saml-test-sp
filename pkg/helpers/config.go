@@ -11,7 +11,7 @@ import (
 	"github.com/crewjam/saml/samlsp"
 )
 
-func env(key string, fallback string) string {
+func Env(key string, fallback string) string {
 	value, exists := os.LookupEnv(key)
 	if exists {
 		return value
@@ -33,8 +33,8 @@ func LoadConfig() samlsp.Options {
 		}
 		samlOptions.IDPMetadataURL = idpMetadataURL
 	} else {
-		ssoURL := env("SP_SSO_URL", "")
-		binding := env("SP_SSO_BINDING", saml.HTTPPostBinding)
+		ssoURL := Env("SP_SSO_URL", "")
+		binding := Env("SP_SSO_BINDING", saml.HTTPPostBinding)
 		samlOptions.IDPMetadata = &saml.EntityDescriptor{
 			IDPSSODescriptors: []saml.IDPSSODescriptor{
 				{
@@ -49,9 +49,9 @@ func LoadConfig() samlsp.Options {
 		}
 	}
 
-	samlOptions.EntityID = env("SP_ENTITY_ID", "saml-test-sp")
+	samlOptions.EntityID = Env("SP_ENTITY_ID", "saml-test-sp")
 
-	rootURL := env("SP_ROOT_URL", "http://localhost:9009")
+	rootURL := Env("SP_ROOT_URL", "http://localhost:9009")
 	url, err := url.Parse(rootURL)
 	if err != nil {
 		panic(err)
