@@ -36,7 +36,7 @@ func RunServer() {
 	http.Handle("/saml/", samlSP)
 	http.HandleFunc("/health", health)
 
-	listen := fmt.Sprintf("%s:%s", config.URL.Hostname(), config.URL.Port())
+	listen := helpers.Env("SP_BIND", "localhost:9009")
 	log.Infof("Server listening on '%s'", listen)
 	log.Infof("ACS URL is 'http://%s/saml/acs'", config.URL.Host)
 

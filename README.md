@@ -16,6 +16,7 @@ This tool is full configured using environment variables.
 
 ## Configuration
 
+- `SP_BIND`: Which address and port to bind to. Defaults to `0.0.0.0:9000`.
 - `SP_ROOT_URL`: Root URL you're using to access the SP. Defaults to `http://localhost:9000`.
 - `SP_ENTITY_ID`: SAML EntityID, defaults to `saml-test-sp`
 - `SP_METADATA_URL`: Optional URL that metadata is fetched from. The metadata is fetched on the first request to `/`
