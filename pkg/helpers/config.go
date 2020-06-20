@@ -21,7 +21,8 @@ func Env(key string, fallback string) string {
 
 func LoadConfig() samlsp.Options {
 	samlOptions := samlsp.Options{
-		Logger: log.WithField("component", "saml-lib"),
+		AllowIDPInitiated: true,
+		Logger:            log.WithField("component", "saml-lib"),
 	}
 
 	samlOptions.EntityID = Env("SP_ENTITY_ID", "saml-test-sp")
