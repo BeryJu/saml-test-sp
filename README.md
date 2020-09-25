@@ -22,7 +22,7 @@ This tool is full configured using environment variables.
 - `SP_METADATA_URL`: Optional URL that metadata is fetched from. The metadata is fetched on the first request to `/`
 ---
 - `SP_SSO_URL`: If the metadata URL is not configured, use these options to configure it manually.
-- `SP_SSO_BINDING`: Binding Type used for the IdP, defaults to POST Redirect. Allowed values: `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST` and `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect`
+- `SP_SSO_BINDING`: Binding Type used for the IdP, defaults to POST. Allowed values: `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST` and `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect`
 - `SP_SIGNING_CERT`: PEM-encoded Certificate used for signing, with the PEM Header and all newlines removed.
 ---
 Optionally, if you want to use SSL, set these variables
@@ -47,7 +47,7 @@ docke run -d --rm \
 Or if you want to use docker-compose, use this in your `docker-compose.yaml`.
 
 ```yaml
-version: 3.5
+version: '3.5'
 
 services:
   saml-test-sp:
