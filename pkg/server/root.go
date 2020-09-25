@@ -29,6 +29,8 @@ func logRequest(handler http.Handler) http.Handler {
 
 func RunServer() {
 	config := helpers.LoadConfig()
+	config.CookieSameSite = http.SameSiteNoneMode
+
 	samlSP, err := samlsp.New(config)
 
 	if err != nil {
