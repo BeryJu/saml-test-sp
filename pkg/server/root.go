@@ -38,7 +38,7 @@ func RunServer() {
 
 	listen := helpers.Env("SP_BIND", "localhost:9009")
 	log.Infof("Server listening on '%s'", listen)
-	log.Infof("ACS URL is 'http://%s/saml/acs'", config.URL.Host)
+	log.Infof("ACS URL is '%s'", samlSP.ServiceProvider.AcsURL.String())
 
 	err = http.ListenAndServe(listen, logRequest(http.DefaultServeMux))
 	if err != nil {
