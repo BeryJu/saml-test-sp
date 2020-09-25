@@ -3,6 +3,7 @@ package server
 import (
 	"fmt"
 	"net/http"
+	"os"
 
 	log "github.com/sirupsen/logrus"
 
@@ -29,6 +30,7 @@ func logRequest(handler http.Handler) http.Handler {
 func RunServer() {
 	config := helpers.LoadConfig()
 	samlSP, err := samlsp.New(config)
+
 	if err != nil {
 		panic(err)
 	}
@@ -40,8 +42,16 @@ func RunServer() {
 	log.Infof("Server listening on '%s'", listen)
 	log.Infof("ACS URL is '%s'", samlSP.ServiceProvider.AcsURL.String())
 
-	err = http.ListenAndServe(listen, logRequest(http.DefaultServeMux))
-	if err != nil {
-		panic(err)
+	if _, set := os.LookupEnv("SP_SSL_CERT"); set {
+		// SP_SSL_CERT set, so we run SSL mode
+		err := http.ListenAndServeTLS(listen, os.Getenv("SP_SSL_CERT"), os.Getenv("SP_SSL_KEY"), nil)
+		if err != nil {
+			panic(err)
+		}
+	} else {
+		err = http.ListenAndServe(listen, logRequest(http.DefaultServeMux))
+		if err != nil {
+			panic(err)
+		}
 	}
 }

@@ -63,7 +63,11 @@ func LoadConfig() samlsp.Options {
 		}
 	}
 
-	rootURL := Env("SP_ROOT_URL", "http://localhost:9009")
+	defaultURL := "http://localhost:9009"
+	if _, ok := os.LookupEnv("SP_SSL_CERT"); ok {
+		defaultURL = "https://localhost:9009"
+	}
+	rootURL := Env("SP_ROOT_URL", defaultURL)
 	url, err := url.Parse(rootURL)
 	if err != nil {
 		panic(err)
