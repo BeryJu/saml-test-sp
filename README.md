@@ -43,3 +43,23 @@ docke run -d --rm \
     -e SP_SSO_URL=http://id.beryju.org/... \
     beryju/saml-test-sp
 ```
+
+Or if you want to use docker-compose, use this in your `docker-compose.yaml`.
+
+```yaml
+version: 3.5
+
+services:
+  saml-test-sp:
+    image: beryju/saml-test-sp
+    ports:
+      - 9009:9009
+    environment:
+      SP_METADATA_URL: http://some.site.tld/saml/metadata
+    # If you don't want SSL, cut here
+      SP_SSL_CERT: /fullchain.pem
+      SP_SSL_KEY: /privkey.pem
+    volumes:
+      - ./fullchain.pem:/fullchain.pem
+      - ./privkey.pem:/privkey.pem
+```
