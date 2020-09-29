@@ -1,6 +1,7 @@
 package server
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"os"
@@ -12,7 +13,23 @@ import (
 )
 
 func hello(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello, %s!", samlsp.AttributeFromContext(r.Context(), "cn"))
+	s := samlsp.SessionFromContext(r.Context())
+	if s == nil {
+		http.Error(w, "No Session", http.StatusInternalServerError)
+		return
+	}
+	sa, ok := s.(samlsp.SessionWithAttributes)
+	if !ok {
+		http.Error(w, "Session has no attributes", http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	data, err := json.MarshalIndent(sa, "", "    ")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Write(data)
 }
 
 func health(w http.ResponseWriter, r *http.Request) {
@@ -22,14 +39,13 @@ func health(w http.ResponseWriter, r *http.Request) {
 
 func logRequest(handler http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		log.Printf("%s %s %s\n", r.RemoteAddr, r.Method, r.URL)
+		log.WithField("remoteAddr", r.RemoteAddr).WithField("method", r.Method).Info(r.URL)
 		handler.ServeHTTP(w, r)
 	})
 }
 
 func RunServer() {
 	config := helpers.LoadConfig()
-	config.CookieSameSite = http.SameSiteNoneMode
 
 	samlSP, err := samlsp.New(config)
 
