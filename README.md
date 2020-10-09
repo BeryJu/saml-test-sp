@@ -5,6 +5,8 @@
 
 This is a small, golang-based SAML Service Provider, to be used in End-to-end or other testing. It uses the https://github.com/crewjam/saml Library for the actual SAML Logic.
 
+SAML-test-SP supports IdP-initiated Login flows, *however* RelayState has to be empty for this to work.
+
 This tool is full configured using environment variables.
 
 ## URLs
