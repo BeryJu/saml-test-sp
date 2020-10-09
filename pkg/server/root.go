@@ -62,7 +62,7 @@ func RunServer() {
 
 	if _, set := os.LookupEnv("SP_SSL_CERT"); set {
 		// SP_SSL_CERT set, so we run SSL mode
-		err := http.ListenAndServeTLS(listen, os.Getenv("SP_SSL_CERT"), os.Getenv("SP_SSL_KEY"), nil)
+		err := http.ListenAndServeTLS(listen, os.Getenv("SP_SSL_CERT"), os.Getenv("SP_SSL_KEY"), logRequest(http.DefaultServeMux))
 		if err != nil {
 			panic(err)
 		}
