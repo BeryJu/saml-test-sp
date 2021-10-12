@@ -1,6 +1,6 @@
 # SAML-test-SP
 
-![GitHub branch checks state](https://img.shields.io/github/checks-status/beryju/saml-test-sp/master?style=flat-square)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/beryju/saml-test-sp/ci-build?style=for-the-badge)
 
 This is a small, golang-based SAML Service Provider, to be used in End-to-end or other testing. It uses the https://github.com/crewjam/saml Library for the actual SAML Logic.
 
@@ -37,12 +37,13 @@ Note: If you're manually setting `SP_ROOT_URL`, ensure that you prefix that URL 
 This service is intended to run in a docker container
 
 ```
-docker pull ghcr.io/beryju/saml-test-sp
+# beryju.org is a vanity URL for ghcr.io/beryju
+docker pull beryju.org/saml-test-sp
 docke run -d --rm \
     -p 9009:9009 \
     -e SP_ENTITY_ID=saml-test-sp \
     -e SP_SSO_URL=http://id.beryju.org/... \
-    ghcr.io/beryju/saml-test-sp
+    beryju.org/saml-test-sp
 ```
 
 Or if you want to use docker-compose, use this in your `docker-compose.yaml`.
@@ -52,7 +53,7 @@ version: '3.5'
 
 services:
   saml-test-sp:
-    image: ghcr.io/beryju/saml-test-sp
+    image: beryju.org/saml-test-sp
     ports:
       - 9009:9009
     environment:
