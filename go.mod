@@ -1,4 +1,4 @@
-module github.com/BeryJu/saml-test-sp-go
+module beryju.org/saml-test-sp
 
 go 1.13
 
