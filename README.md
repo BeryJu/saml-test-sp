@@ -39,7 +39,7 @@ This service is intended to run in a docker container
 ```
 # beryju.org is a vanity URL for ghcr.io/beryju
 docker pull beryju.org/saml-test-sp
-docke run -d --rm \
+docker run -d --rm \
     -p 9009:9009 \
     -e SP_ENTITY_ID=saml-test-sp \
     -e SP_SSO_URL=http://id.beryju.org/... \
