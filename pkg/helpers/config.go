@@ -1,7 +1,9 @@
 package helpers
 
 import (
+	"context"
 	"fmt"
+	"net/http"
 	"net/url"
 	"os"
 
@@ -22,7 +24,6 @@ func Env(key string, fallback string) string {
 func LoadConfig() samlsp.Options {
 	samlOptions := samlsp.Options{
 		AllowIDPInitiated: true,
-		Logger:            log.WithField("component", "saml-lib"),
 	}
 
 	samlOptions.EntityID = Env("SP_ENTITY_ID", "saml-test-sp")
@@ -34,7 +35,11 @@ func LoadConfig() samlsp.Options {
 		if err != nil {
 			panic(err)
 		}
-		samlOptions.IDPMetadataURL = idpMetadataURL
+		desc, err := samlsp.FetchMetadata(context.TODO(), http.DefaultClient, *idpMetadataURL)
+		if err != nil {
+			panic(err)
+		}
+		samlOptions.IDPMetadata = desc
 	} else {
 		ssoURL := Env("SP_SSO_URL", "")
 		binding := Env("SP_SSO_BINDING", saml.HTTPPostBinding)
@@ -51,12 +56,18 @@ func LoadConfig() samlsp.Options {
 				},
 			},
 		}
-		if singingCert := Env("SP_SIGNING_CERT", ""); singingCert != "" {
+		if signingCert := Env("SP_SIGNING_CERT", ""); signingCert != "" {
 			samlOptions.IDPMetadata.IDPSSODescriptors[0].KeyDescriptors = []saml.KeyDescriptor{
 				{
 					Use: "singing",
 					KeyInfo: saml.KeyInfo{
-						Certificate: singingCert,
+						X509Data: saml.X509Data{
+							X509Certificates: []saml.X509Certificate{
+								{
+									Data: signingCert,
+								},
+							},
+						},
 					},
 				},
 			}
