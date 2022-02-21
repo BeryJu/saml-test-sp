@@ -13,6 +13,7 @@ This tool is full configured using environment variables.
 - `http://localhost:9009/health`: Healthcheck URL, used by the docker healtcheck.
 - `http://localhost:9009/saml/acs`: SAML ACS URL, needed to configure your IdP.
 - `http://localhost:9009/saml/metadata`: SAML Metadata URL, needed to configure your IdP.
+- `http://localhost:9009/saml/logout`: SAML Logout URL.
 - `http://localhost:9009/`: Test URL, redirects to SAML SSO URL.
 
 ## Configuration
