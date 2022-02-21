@@ -114,6 +114,7 @@ func RunServer() {
 	server.l.Infof("ACS URL is '%s'", samlSP.ServiceProvider.AcsURL.String())
 
 	if _, set := os.LookupEnv("SP_SSL_CERT"); set {
+		server.l.Info("SSL enabled")
 		// SP_SSL_CERT set, so we run SSL mode
 		err := http.ListenAndServeTLS(listen, os.Getenv("SP_SSL_CERT"), os.Getenv("SP_SSL_KEY"), server.logRequest(server.h))
 		if err != nil {
