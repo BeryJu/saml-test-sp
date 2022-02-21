@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"strings"
 
 	log "github.com/sirupsen/logrus"
 
@@ -88,6 +89,12 @@ func LoadConfig() samlsp.Options {
 	priv, pub := Generate(fmt.Sprintf("localhost,%s", url.Hostname()))
 	samlOptions.Key = priv
 	samlOptions.Certificate = pub
+	if sign := Env("SP_SIGN_REQUESTS", "false"); strings.ToLower(sign) == "true" {
+		samlOptions.Key = LoadRSAKey(os.Getenv("SP_SSL_KEY"))
+		samlOptions.Certificate = LoadCertificate(os.Getenv("SP_SSL_CERT"))
+		samlOptions.SignRequest = true
+		log.Debug("Signing requests")
+	}
 	log.Debugf("Configuration Optons: %+v", samlOptions)
 	return samlOptions
 }

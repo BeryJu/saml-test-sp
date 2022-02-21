@@ -30,6 +30,7 @@ This tool is full configured using environment variables.
 Optionally, if you want to use SSL, set these variables
 - `SP_SSL_CERT`: Path to the SSL Certificate the server should use.
 - `SP_SSL_KEY`: Path to the SSL Key the server should use.
+- `SP_SIGN_REQUESTS`: Enable signing of requests.
 
 Note: If you're manually setting `SP_ROOT_URL`, ensure that you prefix that URL with https.
 
