@@ -14,6 +14,9 @@ import (
 
 func Generate(host string) (*rsa.PrivateKey, *x509.Certificate) {
 	priv, err := rsa.GenerateKey(rand.Reader, 2048)
+	if err != nil {
+		panic(err)
+	}
 
 	notBefore := time.Now()
 	notAfter := notBefore.Add(365 * 24 * time.Hour)
@@ -35,7 +38,7 @@ func Generate(host string) (*rsa.PrivateKey, *x509.Certificate) {
 		KeyUsage:              x509.KeyUsageKeyEncipherment | x509.KeyUsageDigitalSignature,
 		ExtKeyUsage:           []x509.ExtKeyUsage{x509.ExtKeyUsageServerAuth},
 		BasicConstraintsValid: true,
-		DNSNames: strings.Split(host, ","),
+		DNSNames:              strings.Split(host, ","),
 	}
 
 	hosts := strings.Split(host, ",")

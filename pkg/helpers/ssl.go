@@ -4,11 +4,11 @@ import (
 	"crypto/rsa"
 	"crypto/x509"
 	"encoding/pem"
-	"io/ioutil"
+	"os"
 )
 
 func LoadRSAKey(path string) *rsa.PrivateKey {
-	data, err := ioutil.ReadFile(path)
+	data, err := os.ReadFile(path)
 	if err != nil {
 		panic(err)
 	}
@@ -21,7 +21,7 @@ func LoadRSAKey(path string) *rsa.PrivateKey {
 }
 
 func LoadCertificate(path string) *x509.Certificate {
-	data, err := ioutil.ReadFile(path)
+	data, err := os.ReadFile(path)
 	if err != nil {
 		panic(err)
 	}

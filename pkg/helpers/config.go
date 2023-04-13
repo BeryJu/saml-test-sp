@@ -60,7 +60,7 @@ func LoadConfig() samlsp.Options {
 		if signingCert := Env("SP_SIGNING_CERT", ""); signingCert != "" {
 			samlOptions.IDPMetadata.IDPSSODescriptors[0].KeyDescriptors = []saml.KeyDescriptor{
 				{
-					Use: "singing",
+					Use: "signing",
 					KeyInfo: saml.KeyInfo{
 						X509Data: saml.X509Data{
 							X509Certificates: []saml.X509Certificate{
