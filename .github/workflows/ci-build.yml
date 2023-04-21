@@ -2,29 +2,21 @@ name: ci-build
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
-    - name: Login to GitHub Container Registry
-      uses: docker/login-action@v2
-      with:
-        registry: ghcr.io
-        username: ${{ github.repository_owner }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-    - name: Build and push Docker images
-      uses: docker/build-push-action@v4.0.0
-      with:
-        tags: ghcr.io/beryju/saml-test-sp:latest
-        push: ${{ github.ref == 'refs/heads/master' }}
-        platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v4
+        with:
+          cache: true
+          go-version-file: 'go.mod'
+      - run: |
+          go mod download
+      - uses: golangci/golangci-lint-action@v3
+      - run: |
+          go build -v .
