@@ -11,6 +11,6 @@ COPY --from=builder /go/bin/saml-test-sp /saml-test-sp
 EXPOSE 9009
 WORKDIR /web-root
 ENV SP_BIND=0.0.0.0:9009
-HEALTHCHECK CMD [ "wget", "--spider", "http://localhost:9009/health" ]
+HEALTHCHECK --interval=5s --start-period=1s CMD [ "wget", "--spider", "http://localhost:9009/health" ]
 CMD [ "/saml-test-sp" ]
 ENTRYPOINT [ "/saml-test-sp" ]
