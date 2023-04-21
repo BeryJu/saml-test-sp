@@ -87,5 +87,5 @@ brews:
       name: goreleaserbot
       email: goreleaser@beryju.org
     homepage: 'https://github.com/beryju/{{ .ProjectName }}'
-    description: 'This is a small, golang-based SAML SP, to be used in End-to-end or other testing.'
+    description: 'A small, SAML ServiceProvider for testing and debugging'
     folder: Formula
