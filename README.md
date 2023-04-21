@@ -1,6 +1,6 @@
 # SAML-test-SP
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/beryju/saml-test-sp/ci-build?style=for-the-badge)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/beryju/saml-test-sp/ci-build.yml?branch=main&style=for-the-badge)
 
 This is a small, golang-based SAML Service Provider, to be used in End-to-end or other testing. It uses the https://github.com/crewjam/saml Library for the actual SAML Logic.
 
