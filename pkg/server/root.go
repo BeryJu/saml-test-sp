@@ -37,7 +37,7 @@ func (s *Server) hello(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	w.Write(data)
+	_, _ = w.Write(data)
 }
 
 func (s *Server) health(w http.ResponseWriter, r *http.Request) {
@@ -80,7 +80,7 @@ func (s *Server) logout(w http.ResponseWriter, r *http.Request) {
 			s.l.WithError(err).Warning("failed to make post logout")
 		}
 		w.Header().Set("Content-Type", "text/html")
-		w.Write(res)
+		_, _ = w.Write(res)
 	} else {
 		http.Error(w, "invalid binding", 500)
 	}
