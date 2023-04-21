@@ -87,5 +87,5 @@ brews:
       name: goreleaserbot
       email: goreleaser@beryju.org
     homepage: 'https://github.com/beryju/{{ .ProjectName }}'
-    description: 'A small, SAML ServiceProvider for testing and debugging'
+    description: 'Small, SAML ServiceProvider for testing and debugging'
     folder: Formula
