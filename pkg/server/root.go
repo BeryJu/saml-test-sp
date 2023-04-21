@@ -8,7 +8,7 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
-	"beryju.org/saml-test-sp/pkg/helpers"
+	"beryju.io/saml-test-sp/pkg/helpers"
 	"github.com/crewjam/saml"
 	"github.com/crewjam/saml/samlsp"
 )

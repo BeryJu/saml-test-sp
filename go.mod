@@ -1,4 +1,4 @@
-module beryju.org/saml-test-sp
+module beryju.io/saml-test-sp
 
 go 1.16
 

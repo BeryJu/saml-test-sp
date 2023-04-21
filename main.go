@@ -1,7 +1,7 @@
 package main
 
 import (
-	"beryju.org/saml-test-sp/pkg/server"
+	"beryju.io/saml-test-sp/pkg/server"
 
 	log "github.com/sirupsen/logrus"
 )

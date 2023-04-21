@@ -40,12 +40,12 @@ This service is intended to run in a docker container
 
 ```
 # beryju.org is a vanity URL for ghcr.io/beryju
-docker pull beryju.org/saml-test-sp
+docker pull beryju.io/saml-test-sp
 docker run -d --rm \
     -p 9009:9009 \
     -e SP_ENTITY_ID=saml-test-sp \
-    -e SP_SSO_URL=http://id.beryju.org/... \
-    beryju.org/saml-test-sp
+    -e SP_SSO_URL=http://id.beryju.io/... \
+    beryju.io/saml-test-sp
 ```
 
 Or if you want to use docker-compose, use this in your `docker-compose.yaml`.
@@ -55,7 +55,7 @@ version: '3.5'
 
 services:
   saml-test-sp:
-    image: beryju.org/saml-test-sp
+    image: beryju.io/saml-test-sp
     ports:
       - 9009:9009
     environment:
