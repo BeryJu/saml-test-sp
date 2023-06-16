@@ -1,4 +1,4 @@
-FROM docker.io/library/alpine:3.18.0
+FROM docker.io/library/alpine:3.18.2
 RUN apk add --no-cache ca-certificates
 COPY saml-test-sp /
 EXPOSE 9009
