@@ -1,5 +1,7 @@
-FROM docker.io/library/alpine:3.18.4
-RUN apk add --no-cache ca-certificates
+FROM docker.io/library/debian:12-slim
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends ca-certificates && \
+    apt-get clean
 COPY saml-test-sp /
 EXPOSE 9009
 WORKDIR /web-root
