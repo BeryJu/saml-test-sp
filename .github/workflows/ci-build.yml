@@ -17,6 +17,6 @@ jobs:
           go-version-file: 'go.mod'
       - run: |
           go mod download
-      - uses: golangci/golangci-lint-action@v3
+      - uses: golangci/golangci-lint-action@v4
       - run: |
           go build -v .
