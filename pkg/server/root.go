@@ -42,7 +42,7 @@ func (s *Server) hello(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) health(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(200)
-	fmt.Fprint(w, "hello :)")
+	_, _ = fmt.Fprint(w, "hello :)")
 }
 
 func (s *Server) logRequest(handler http.Handler) http.Handler {
@@ -68,20 +68,21 @@ func (s *Server) logout(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if binding.Binding == saml.HTTPRedirectBinding {
+	switch binding.Binding {
+	case saml.HTTPRedirectBinding:
 		url, err := s.m.ServiceProvider.MakeRedirectLogoutRequest(nameID, s.b+"/health")
 		if err != nil {
 			s.l.WithError(err).Warning("failed to make redirect logout")
 		}
 		http.Redirect(w, r, url.String(), http.StatusFound)
-	} else if binding.Binding == saml.HTTPPostBinding {
+	case saml.HTTPPostBinding:
 		res, err := s.m.ServiceProvider.MakePostLogoutRequest(nameID, s.b+"/health")
 		if err != nil {
 			s.l.WithError(err).Warning("failed to make post logout")
 		}
 		w.Header().Set("Content-Type", "text/html")
 		_, _ = w.Write(res)
-	} else {
+	default:
 		http.Error(w, "invalid binding", 500)
 	}
 	err := s.m.Session.DeleteSession(w, r)
