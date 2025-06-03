@@ -25,6 +25,7 @@ func Env(key string, fallback string) string {
 func LoadConfig() samlsp.Options {
 	samlOptions := samlsp.Options{
 		AllowIDPInitiated: true,
+		CookieName: Env("SP_COOKIE_NAME", "token"),
 	}
 
 	samlOptions.EntityID = Env("SP_ENTITY_ID", "saml-test-sp")
