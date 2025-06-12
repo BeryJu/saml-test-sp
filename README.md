@@ -22,7 +22,7 @@ This tool is full configured using environment variables.
 - `SP_ROOT_URL`: Root URL you're using to access the SP. Defaults to `http://localhost:9009`.
 - `SP_ENTITY_ID`: SAML EntityID, defaults to `saml-test-sp`.
 - `SP_METADATA_URL`: Optional URL that metadata is fetched from. The metadata is fetched on the first request to `/`.
-- `SP_COOKIE_NAME`: Custom name for the session cookie. Defaults to token. Use this to avoid cookie name conflicts with other applications.
+- `SP_COOKIE_NAME`: Custom name for the session cookie. Defaults to `token`. Use this to avoid cookie name conflicts with other applications.
 ---
 - `SP_SSO_URL`: If the metadata URL is not configured, use these options to configure it manually.
 - `SP_SSO_BINDING`: Binding Type used for the IdP, defaults to POST. Allowed values: `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST` and `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect`
