@@ -87,7 +87,7 @@ checksum:
 
 homebrew_casks:
 - ids:
-    - raw
+    - tar
   commit_author:
     name: goreleaserbot
     email: goreleaser@beryju.org
