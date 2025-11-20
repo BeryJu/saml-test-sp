@@ -1,6 +1,6 @@
 module beryju.io/saml-test-sp
 
-go 1.23.0
+go 1.24.0
 
 toolchain go1.24.3
 
@@ -15,6 +15,6 @@ require (
 	github.com/jonboulle/clockwork v0.2.2 // indirect
 	github.com/mattermost/xml-roundtrip-validator v0.1.0 // indirect
 	github.com/russellhaering/goxmldsig v1.4.0 // indirect
-	golang.org/x/crypto v0.35.0 // indirect
-	golang.org/x/sys v0.30.0 // indirect
+	golang.org/x/crypto v0.45.0 // indirect
+	golang.org/x/sys v0.38.0 // indirect
 )
