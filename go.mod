@@ -6,7 +6,7 @@ toolchain go1.24.3
 
 require (
 	github.com/crewjam/saml v0.5.1
-	github.com/sirupsen/logrus v1.9.3
+	github.com/sirupsen/logrus v1.9.4
 )
 
 require (
