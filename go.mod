@@ -4,7 +4,7 @@ go 1.25.0
 
 require (
 	github.com/crewjam/saml v0.5.1
-	github.com/sirupsen/logrus v1.10.1
+	github.com/sirupsen/logrus v1.10.2
 )
 
 require (
